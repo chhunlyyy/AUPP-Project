@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-world-deployment
+  name: snack-game-deployment
   labels:
-    app: hello-world
+    app: snack-game
 spec:
   selector:
     matchLabels:
-      app: hello-world
+      app: snack-game
   replicas: 2
   template:
     metadata:
       labels:
-        app: hello-world
+        app: snack-game
     spec:
       containers:
-      - name: hello-world
+      - name: snack-game
         image: bhargavshah86/kube-test:v0.1
         ports:
         - containerPort: 80
@@ -30,10 +30,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello-world-service
+  name: snack-game-service
 spec:
   selector:
-    app: hello-world
+    app: snack-game
   ports:
     - protocol: TCP
       port: 80
