@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: aupp-rms-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: 34.173.186.9
+      http:
+        paths:
+          - path: /rms
+            pathType: Prefix
+            backend:
+              service:
+                name: aupp-rms-service
+                port:
+                  number: 80

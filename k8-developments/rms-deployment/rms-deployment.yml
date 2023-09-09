@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aupp-rms-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: aupp-rms
+  template:
+    metadata:
+      labels:
+        app: aupp-rms
+    spec:
+      containers:
+        - name: aupp-rms
+          image: paulbouwer/hello-kubernetes:1.10
+          ports:
+            - containerPort: 8080
