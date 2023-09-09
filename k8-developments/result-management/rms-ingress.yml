@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: 34.173.186.9
+    - host: aupp-rms.com
       http:
         paths:
           - path: /rms
