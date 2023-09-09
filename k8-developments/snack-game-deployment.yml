@@ -19,13 +19,6 @@ spec:
         image: bhargavshah86/kube-test:v0.1
         ports:
         - containerPort: 80
-        resources:
-          limits:
-            memory: 256Mi
-            cpu: "250m"
-          requests:
-            memory: 128Mi
-            cpu: "80m"
 ---
 apiVersion: v1
 kind: Service
