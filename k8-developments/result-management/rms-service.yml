@@ -2,9 +2,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: aupp-rms-service
+  labels:
+    run: aupp-rms-service
 spec:
   selector:
-    app: aupp-rms
+    run: aupp-rms
   ports:
     - protocol: TCP
       port: 80
