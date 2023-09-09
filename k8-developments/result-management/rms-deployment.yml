@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: aupp-rms
-          image: paulbouwer/hello-kubernetes:1.10
+          image: hello-world
           ports:
             - containerPort: 8080
