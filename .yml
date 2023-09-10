@@ -1,0 +1,3 @@
+- name: Push to GCR GitHub Action
+  uses: RafikFarhad/push-to-gcr-github-action@v4.1
+            
