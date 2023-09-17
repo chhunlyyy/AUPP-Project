@@ -5,16 +5,23 @@ spring:
  cloud:
    gateway:
      routes:
-       - id: admin-service
-         uri: lb://ADMIN-SERVICE
-         predicates:
+      - id: teacher-service
+        uri: lb://TEACHER-SERVICE
+        predicates:
+           - Path=/teacher/**
+        filters:
+           - AuthenticationFilter 
+
+      - id: admin-service
+        uri: lb://ADMIN-SERVICE
+        predicates:
            - Path=/admin/**
-         filters:
+        filters:
            - AuthenticationFilter
 
-       - id: identity-service
-         uri: lb://IDENTITY-SERVICE
-         predicates:
+      - id: identity-service
+        uri: lb://IDENTITY-SERVICE
+        predicates:
            - Path=/auth/**
 
  application:

@@ -29,6 +29,13 @@ public interface ClassService {
      */
     public ResponseEntity<Object> update(ClassEntity classEntity);
 
+     /**
+     * 
+     * @param classEntity
+     * @return
+     */
+    public ResponseEntity<Object> classByTeacher(int teacherId);
+
     /**
      * 
      * @param id

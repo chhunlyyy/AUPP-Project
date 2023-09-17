@@ -24,15 +24,17 @@ public class ClassController {
     @Autowired
     private ClassService service;
 
-    @Autowired 
+    @Autowired
     private StudentService studentService;
 
-
     @GetMapping("/detail")
-     public ResponseEntity<Object> add(@RequestParam int id) {
+    public ResponseEntity<Object> add(@RequestParam int id) {
         return service.detail(id);
     }
-
+     @GetMapping("/by-teacher")
+    public ResponseEntity<Object> enrollStudent(@RequestParam int teacherId) {
+        return service.classByTeacher(teacherId);
+    }
 
     @PostMapping("/add")
     public ResponseEntity<Object> add(@RequestBody ClassEntity classEntity) {
@@ -49,8 +51,9 @@ public class ClassController {
         return service.delete(id);
     }
 
-     @PostMapping("/enroll-student")
+    @PostMapping("/enroll-student")
     public ResponseEntity<Object> enrollStudent(@RequestBody List<StudentEntity> studentEntities) {
         return studentService.enrole(studentEntities);
     }
+   
 }

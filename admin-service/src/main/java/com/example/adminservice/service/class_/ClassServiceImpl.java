@@ -1,5 +1,6 @@
 package com.example.adminservice.service.class_;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,11 +58,21 @@ public class ClassServiceImpl implements ClassService {
 
     @Override
     public ResponseEntity<Object> detail(int id) {
-       Optional<ClassEntity> optionalClass = repo.findById(id);
+        Optional<ClassEntity> optionalClass = repo.findById(id);
         if (optionalClass.isPresent()) {
             return ResponeHandler.generateResponse("", HttpStatus.OK, optionalClass.get());
         } else {
             return ResponeHandler.generateResponse("Class Not Exist", HttpStatus.EXPECTATION_FAILED, null);
+        }
+    }
+
+    @Override
+    public ResponseEntity<Object> classByTeacher(int teacherId) {
+        List<ClassEntity> results = repo.classByTeacher(teacherId);
+        if (results.isEmpty()) {
+            return ResponeHandler.generateResponse("Class Not Exist", HttpStatus.EXPECTATION_FAILED, null);
+        } else {
+            return ResponeHandler.generateResponse("", HttpStatus.OK, results);
         }
     }
 

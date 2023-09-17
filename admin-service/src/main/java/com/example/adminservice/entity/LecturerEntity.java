@@ -19,7 +19,7 @@ public class LecturerEntity {
     private String phone;
     private String address;
 
-    @OneToOne(mappedBy = "lecturer")
+    @OneToOne(mappedBy = "teacher")
     private ClassEntity classEntity;
 
     public LecturerEntity(String name, String email, String phone, String address) {
