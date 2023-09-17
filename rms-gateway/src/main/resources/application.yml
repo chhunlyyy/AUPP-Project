@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+ cloud:
+   gateway:
+     routes:
+       - id: admin-service
+         uri: lb://ADMIN-SERVICE
+         predicates:
+           - Path=/admin/**
+         filters:
+           - AuthenticationFilter
+
+       - id: identity-service
+         uri: lb://IDENTITY-SERVICE
+         predicates:
+           - Path=/auth/**
+
+ application:
+   name: RMS-GATEWAY
+
+eureka:
+  client:
+    service-url:
+      defaultZone : http://localhost:8761/eureka/
