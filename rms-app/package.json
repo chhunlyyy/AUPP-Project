@@ -1,0 +1,24 @@
+{
+  "name": "rms-app",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "format": "prettier --write src/"
+  },
+  "dependencies": {
+    "@headlessui/vue": "^1.7.16",
+    "@heroicons/vue": "^2.0.18",
+    "@tailwindcss/forms": "^0.5.6",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.3.4",
+    "prettier": "^3.0.3",
+    "tailwindcss": "^3.3.3",
+    "vite": "^4.4.9"
+  }
+}
