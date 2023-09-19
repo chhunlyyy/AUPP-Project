@@ -40,7 +40,7 @@
   import { ref, onMounted } from 'vue'
   import { useRouter, useRoute } from 'vue-router';
 
-  const { login, isAuthenticated } = useSessionLogin();
+  const { login, logout, isAuthenticated } = useSessionLogin();
 
   const email = ref(null);
   const password = ref(null);
@@ -50,13 +50,19 @@
 
   const handleLogin = async () => {
     await login(email.value, password.value);
+    
     if(!isAuthenticated.value)
       isShowError.value = true;
     else
+      intendedRedirect()    
+  }
+
+  const intendedRedirect = () => {
+    if(isAuthenticated.value)
       router.push(route.redirectedFrom ? route.redirectedFrom.fullPath : "/").then(() => router.go());
   }
-  onMounted(() => {
-    if(isAuthenticated.value)
-    router.push("/");
+
+  onMounted(() => {    
+    intendedRedirect();
   })
 </script>

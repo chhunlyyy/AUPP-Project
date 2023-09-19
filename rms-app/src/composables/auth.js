@@ -1,4 +1,4 @@
-import { ref, watchEffect } from 'vue';
+import { ref, reactive } from 'vue';
 
 export function useSessionLogin() {
     const isAuthenticated = ref(false);
@@ -22,17 +22,17 @@ export function useSessionLogin() {
 
             sessionStorage.setItem('token', data.token)
 
-            token.value = data.token
-            isAuthenticated.value = true
+            token.value = data.token;
+            isAuthenticated.value = true;
         } catch (error) {
             console.error('Login error:', error.message)
         }
     }
 
     function logout() {
-        sessionStorage.removeItem('token')
-        token.value = null
-        isAuthenticated.value = false
+        sessionStorage.removeItem('token');
+        token.value = null;
+        isAuthenticated.value = false;
     }
 
     if (sessionStorage.getItem('token')) {
