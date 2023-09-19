@@ -1,4 +1,3 @@
 <template>
-    hello
-    hello
+    Welcome to lecturer page.
 </template>
