@@ -23,6 +23,28 @@ spring:
         uri: lb://IDENTITY-SERVICE
         predicates:
            - Path=/auth/**
+     globalcors:
+       corsConfigurations:
+         '[/**]':
+           allowedOrigins: "*"
+           allowedMethods:
+             - GET
+             - POST
+             - PUT
+             - DELETE
+             - PATCH
+           allowedHeaders:
+             - "Origin"
+             - "Content-Type"
+             - "Accept"
+             - "Authorization"
+             - "User-Key"
+             - "Request-Tracker"
+             - "Session-Tracker"
+             - "X-XSRF-TOKEN"
+             - "X-IBM-CLIENT-ID"
+             - "Message-ID"
+             - "X-IBM-CLIENT-SECRET"
 
  application:
    name: RMS-GATEWAY
