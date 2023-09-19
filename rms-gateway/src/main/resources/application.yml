@@ -1,0 +1,55 @@
+server:
+  port: 8080
+
+spring:
+ cloud:
+   gateway:
+     routes:
+      - id: teacher-service
+        uri: lb://TEACHER-SERVICE
+        predicates:
+           - Path=/teacher/**
+        filters:
+           - AuthenticationFilter 
+
+      - id: admin-service
+        uri: lb://ADMIN-SERVICE
+        predicates:
+           - Path=/admin/**
+        filters:
+           - AuthenticationFilter
+
+      - id: identity-service
+        uri: lb://IDENTITY-SERVICE
+        predicates:
+           - Path=/auth/**
+     globalcors:
+       corsConfigurations:
+         '[/**]':
+           allowedOrigins: "*"
+           allowedMethods:
+             - GET
+             - POST
+             - PUT
+             - DELETE
+             - PATCH
+           allowedHeaders:
+             - "Origin"
+             - "Content-Type"
+             - "Accept"
+             - "Authorization"
+             - "User-Key"
+             - "Request-Tracker"
+             - "Session-Tracker"
+             - "X-XSRF-TOKEN"
+             - "X-IBM-CLIENT-ID"
+             - "Message-ID"
+             - "X-IBM-CLIENT-SECRET"
+
+ application:
+   name: RMS-GATEWAY
+
+eureka:
+  client:
+    service-url:
+      defaultZone : http://localhost:8761/eureka/
