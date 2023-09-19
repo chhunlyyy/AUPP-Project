@@ -37,7 +37,7 @@
 
 <script setup>
   import { useSessionLogin } from '@/composables/auth';
-  import { ref } from 'vue'
+  import { ref, onMounted } from 'vue'
   import { useRouter, useRoute } from 'vue-router';
 
   const { login, isAuthenticated } = useSessionLogin();
@@ -55,4 +55,8 @@
     else
       router.push(route.redirectedFrom ? route.redirectedFrom.fullPath : "/").then(() => router.go());
   }
+  onMounted(() => {
+    if(isAuthenticated.value)
+    router.push("/");
+  })
 </script>

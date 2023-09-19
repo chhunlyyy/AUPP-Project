@@ -1,3 +1,4 @@
 <template>
     hello
+    hello
 </template>
