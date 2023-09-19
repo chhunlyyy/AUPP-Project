@@ -1,9 +1,12 @@
 package com.example.identityservice.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -16,8 +19,8 @@ public class RoleEntity {
     private String name;
     private String description;
 
-    @OneToOne(mappedBy = "role")
-    private UserCredential user;
+    @OneToMany(mappedBy = "role")
+    private List<UserCredential> user;
 
     public RoleEntity(String name, String description) {
         this.name = name;
