@@ -6,6 +6,8 @@ import Error404 from '@/components/404.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  linkActiveClass: "bg-gray-800 text-white",
+  linkExactActiveClass: "bg-gray-800 text-white",
   routes: [
     {
       path: '/',
