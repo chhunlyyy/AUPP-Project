@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isAuthenticated" class="h-full">
+  <div v-if="isAuthenticated || (!$route.meta.requiresAuth && $route.path != '/login')" class="h-full">
     <SdieNavigation>
       <template v-slot:content>
         <RouterView/>
