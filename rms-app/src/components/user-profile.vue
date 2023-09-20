@@ -12,10 +12,10 @@
       leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
       <MenuItems
         class="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
-        <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
-          <router-link :to="{ name: item.name }" :class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm leading-6 text-gray-900']">
-            {{  item.title }}
-          </router-link>
+        <MenuItem v-for="item in userNavigation" :key="item.href" v-slot="{ active }">
+          <a :href="item.href" :class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm leading-6 text-gray-900']">
+            {{  item.name }}
+          </a>
         </MenuItem>
         <MenuItem>
           <a @click="handleLogout()" class="cursor-pointer block px-3 py-1 text-sm leading-6 text-gray-900">Logout</a>
@@ -39,8 +39,8 @@
   
   const userNavigation = [
     { 
-      title: 'Your profile', 
-      name: 'profile'
+      name: 'Your profile', 
+      href: '/profile'
     }
   ];
 

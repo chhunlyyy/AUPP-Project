@@ -3,6 +3,7 @@ import { useSessionLogin } from '@/composables/auth';
 import Login from '@/views/login.vue';
 import Lecturer from '@/views/lecturer.vue';
 import Error404 from '@/components/404.vue'
+import Profile from '@/views/profile-page.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,7 +31,10 @@ const router = createRouter({
     {
       path: '/profile',
       name: 'profile',
-      component: null
+      component: Profile,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
         path: '/:pathMatch(.*)*',
