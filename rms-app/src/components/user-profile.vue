@@ -18,7 +18,8 @@
           </a>
         </MenuItem>
         <MenuItem>
-          <a @click="handleLogout()" class="cursor-pointer block px-3 py-1 text-sm leading-6 text-gray-900">Logout</a>
+          <a v-if="isAuthenticated" @click="handleLogout()" class="cursor-pointer block px-3 py-1 text-sm leading-6 text-gray-900">Logout</a>
+          <router-link v-else to="/login" class="cursor-pointer block px-3 py-1 text-sm leading-6 text-gray-900">Login</router-link>
         </MenuItem>
       </MenuItems>
     </transition>
@@ -45,7 +46,7 @@
   ];
 
   const router = useRouter();
-  const {user, logout} = useSessionLogin();
+  const { logout, isAuthenticated } = useSessionLogin();
 
   const handleLogout = () => {
     logout();
