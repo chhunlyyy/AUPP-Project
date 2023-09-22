@@ -17,9 +17,9 @@
         <div class="mt-5">
           <div class="flex items-center justify-between">
             <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
-            <div class="text-sm">
+            <!-- <div class="text-sm">
               <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
-            </div>
+            </div> -->
           </div>
           <div class="mt-2">
             <input id="password" v-model="password" name="password" type="password" autocomplete="current-password"
@@ -67,13 +67,16 @@
     isLoading.value = true;
 
     await login(email.value, password.value);
-    await sleep(2000);
+    await sleep(900);
     
     isLoading.value = false;
     if(!isAuthenticated.value) {
       showError();
     }
     else {
+      setTimeout(() => {
+        showSuccess();
+      }, 500);
       intendedRedirect();
     }
   }
@@ -81,10 +84,14 @@
   const showError = () => {
     toast.add({ severity: 'error', summary: 'Email or password incorrect.', life: 3000 });
   };
+  
+  const showSuccess = () => {
+    toast.add({ severity: 'success', summary: 'Welcome! You have successfully logged in.', life: 3000, group: 'br' });
+  };
 
   const intendedRedirect = () => {
     if(isAuthenticated.value) {
-      router.push(route.redirectedFrom ? route.redirectedFrom.fullPath : "/").then(() => router.go());
+      router.push(route.redirectedFrom ? route.redirectedFrom.fullPath : "/");
     }
   }
 

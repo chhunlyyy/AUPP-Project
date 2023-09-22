@@ -35,10 +35,10 @@
                       </ul>
                     </li>
                     <li class="mt-auto">
-                      <a href="#" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white">
+                      <router-link :to="{name:'profile'}" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white">
                         <Cog6ToothIcon class="h-6 w-6 shrink-0" aria-hidden="true" />
-                        Settings
-                      </a>
+                        Profile
+                      </router-link>
                     </li>
                   </ul>
                 </nav>
@@ -69,10 +69,10 @@
               </ul>
             </li>        
             <li class="mt-auto">
-              <a href="#" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white">
+              <router-link :to="{name:'profile'}" class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white">
                 <Cog6ToothIcon class="h-6 w-6 shrink-0" aria-hidden="true" />
-                Settings
-              </a>
+                Profile
+              </router-link>
             </li>
           </ul>
         </nav>
@@ -91,9 +91,15 @@
         </div>
       </div>
 
-      <main class="flex-grow overflow-auto">
-          <slot name="content"></slot>
-        </main>
+      <main class="flex-grow overflow-auto h-full">
+        <router-view v-slot="{Component, route}">
+          <transition name="fade" mode="out-in">
+            <div :key="route.name" :class="[route.meta?.class ? route.meta.class : 'pl-3 pt-3 pr-3','h-full']">
+              <component :is='Component'></component>          
+            </div>
+          </transition>
+        </router-view>
+      </main>
     </div>
   </div>
 </template>
@@ -128,11 +134,26 @@ const navigation = [
   // { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
   // { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
   // { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
-]
+];
+
 const teams = [
   { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
   { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
   { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
-]
-const sidebarOpen = ref(false)
+];
+
+const sidebarOpen = ref(false);
+
 </script>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.17s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
