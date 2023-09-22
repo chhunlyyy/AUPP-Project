@@ -6,6 +6,9 @@ import Error404 from '@/components/404.vue';
 import Profile from '@/views/profile-page.vue';
 import SdieNavigation from '@/components/side-navigation.vue';
 import Home from '@/views/home.vue';
+import Subject from '@/views/subject.vue';
+import { HomeIcon } from "@heroicons/vue/24/outline";
+// import { markRaw } from 'vue';
 
 
 const router = createRouter({
@@ -18,14 +21,17 @@ const router = createRouter({
       components: {
         dashboard: SdieNavigation
       },
+      meta: {
+        breadcrumb: {name: '', icon: HomeIcon}
+      },
       children: [
         {
-          path: '',
+          path: '/',
           name: 'home',
           component: Home,
           meta: {
             requiresAuth: true,
-            class: 'p-0'
+            class: 'p-0',
           }
         },
         {
@@ -33,7 +39,17 @@ const router = createRouter({
           name: 'lecturer',
           component: Lecturer,
           meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            breadcrumb: {name: 'Lecturer'}
+          }
+        },        
+        {
+          path: '/subjects',
+          name: 'subject',
+          component: Subject,
+          meta: {
+            requiresAuth: true,
+            breadcrumb: {name: 'Subject'}
           }
         },        
         {
@@ -41,7 +57,8 @@ const router = createRouter({
           name: 'profile',
           component: Profile,
           meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            breadcrumb: {name: 'Subject'}
           }
         }
       ]
@@ -55,21 +72,21 @@ const router = createRouter({
       }
     },
     {
-        path: '/:pathMatch(.*)*',
-        name: '404',
-        components: {
-          dashboard: SdieNavigation
-        },
-        children: [
-          {
-            path:'',
-            name:'404-page',
-            component: Error404,
-            meta: {
-              requiresAuth: true
-            }
+      path: '/:pathMatch(.*)*',
+      name: '404',
+      components: {
+        dashboard: SdieNavigation
+      },
+      children: [
+        {
+          path:'',
+          name:'404-page',
+          component: Error404,
+          meta: {
+            requiresAuth: true
           }
-        ]
+        }
+      ]
     }
   ]
 });
