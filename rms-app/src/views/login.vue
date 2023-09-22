@@ -1,4 +1,4 @@
-<template>
+<template>  
   <div class="flex min-h-full flex-1 flex-col justify-center px-6 py-16 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
       <img class="mx-auto h-20 w-auto" src="../assets/images/aupp-logo.webp" alt="Your Company" />
@@ -25,10 +25,18 @@
             <input id="password" v-model="password" name="password" type="password" autocomplete="current-password"
               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
           </div>
-        </div>
-        <p v-if="isShowError">Failed login</p>
-        <div class="mt-5">
-          <button @click="handleLogin()" :disabled="email == null || password == null" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Signin</button>
+        </div>        
+        <div class="mt-5 flex items-center justify-center">
+          <button @click="handleLogin()" type="button" :disabled="isDisableLogin" class="bg-violet-500 w-full hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 px-5 py-2 text-sm leading-5 rounded font-semibold text-white">
+            <div class="inline-flex items-center" v-if="isLoading">
+              <svg class="motion-reduce:hidden animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Processing...
+            </div>
+            <p v-else>Sign In</p>
+          </button>
         </div>
     </div>
   </div>
@@ -36,8 +44,9 @@
 
 <script setup>
   import { useSessionLogin } from '@/composables/auth';
-  import { ref, onMounted } from 'vue'
+  import { ref, onMounted, computed } from 'vue'
   import { useRouter, useRoute } from 'vue-router';
+  import { useToast } from "primevue/usetoast";
 
   const { login, logout, isAuthenticated } = useSessionLogin();
 
@@ -45,20 +54,38 @@
   const password = ref(null);
   const router = useRouter();
   const route = useRoute();
-  const isShowError = ref(false);
+  const toast = useToast();
+  const isLoading = ref(false);
+  
+  const isDisableLogin = computed(() => {
+    return email.value?.length > 0 && password.value?.length > 0 ? false : true
+  });
+
+  const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
 
   const handleLogin = async () => {
+    isLoading.value = true;
+
     await login(email.value, password.value);
+    await sleep(2000);
     
-    if(!isAuthenticated.value)
-      isShowError.value = true;
-    else
-      intendedRedirect()    
+    isLoading.value = false;
+    if(!isAuthenticated.value) {
+      showError();
+    }
+    else {
+      intendedRedirect();
+    }
   }
 
+  const showError = () => {
+    toast.add({ severity: 'error', summary: 'Email or password incorrect.', life: 3000 });
+  };
+
   const intendedRedirect = () => {
-    if(isAuthenticated.value)
+    if(isAuthenticated.value) {
       router.push(route.redirectedFrom ? route.redirectedFrom.fullPath : "/").then(() => router.go());
+    }
   }
 
   onMounted(() => {    

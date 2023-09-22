@@ -91,9 +91,9 @@
         </div>
       </div>
 
-      <main class="flex-grow overflow-auto px-4 pt-4">
-        <slot name="content"></slot>
-      </main>
+      <main class="flex-grow overflow-auto">
+          <slot name="content"></slot>
+        </main>
     </div>
   </div>
 </template>
@@ -117,9 +117,8 @@ import {
   HomeIcon,
   UsersIcon,
   XMarkIcon,
-} from '@heroicons/vue/24/outline'
-import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
-import UserProfile from '@/components/user-profile.vue'
+} from '@heroicons/vue/24/outline';
+import UserProfile from '@/components/user-profile.vue';
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: HomeIcon},
