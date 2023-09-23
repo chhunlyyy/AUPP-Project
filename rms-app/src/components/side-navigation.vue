@@ -138,11 +138,11 @@
 
       <main class="flex-grow overflow-auto h-full">
         <router-view v-slot="{ Component, route }">
-          <transition name="fade" mode="out-in">
+          <!-- <transition name="fade" mode="out-in"> -->
             <div :key="route.name" :class="[route.meta?.class ? route.meta.class : 'pl-3 pt-3 pr-3', 'h-full']">
               <component :is='Component'></component>
             </div>
-          </transition>
+          <!-- </transition> -->
         </router-view>
       </main>
     </div>
@@ -191,7 +191,7 @@ const navigation = computed(() => ([
       icon: RectangleGroupIcon,
       current: currentUrl.value,
       children: [
-        { name: 'Class', href: '/class'},
+        { name: 'Class', href: ''},
         { name: 'Student', href: '/student'}
       ],
     }

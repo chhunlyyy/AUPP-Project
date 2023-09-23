@@ -1,5 +1,5 @@
 <template>
-  <nav v-if="crumbs?.length > 0" class="flex flex-row justify-between">
+  <nav v-if="crumbs?.length > 0" class="flex flex-row justify-between h-9">
     <ol role="list" class="flex items-center space-x-4">
       <li v-for="(crumb, index) in crumbs" :key="crumb.label">
         <div class="flex items-center">

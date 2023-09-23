@@ -8,6 +8,7 @@ import SdieNavigation from '@/components/side-navigation.vue';
 import Home from '@/views/home.vue';
 import Subject from '@/views/subject.vue';
 import ClassManagement from '@/views/class-management.vue';
+import Student from '@/views/student.vue';
 import { HomeIcon } from "@heroicons/vue/24/outline";
 
 
@@ -26,7 +27,7 @@ const router = createRouter({
       },
       children: [
         {
-          path: '/',
+          path: '',
           name: 'home',
           component: Home,
           meta: {
@@ -35,7 +36,7 @@ const router = createRouter({
           }
         },
         {
-          path: '/lecturers',
+          path: 'lecturers',
           name: 'lecturer',
           component: Lecturer,
           meta: {
@@ -44,7 +45,7 @@ const router = createRouter({
           }
         },        
         {
-          path: '/subjects',
+          path: 'subjects',
           name: 'subject',
           component: Subject,
           meta: {
@@ -53,7 +54,7 @@ const router = createRouter({
           }
         },        
         {
-          path: '/profile',
+          path: 'profile',
           name: 'profile',
           component: Profile,
           meta: {
@@ -62,14 +63,14 @@ const router = createRouter({
           }
         },
         {
-          path: '/class-management',
-          component: ClassManagement,
+          path: 'class-management',
           meta: {
-            breadcrumb: {name: 'Class management'}
+            requiresAuth: true,
+            breadcrumb: { name: 'Class management' }
           },
           children: [
             {
-              path: '/class',
+              path: '',
               name: 'class',
               component: ClassManagement,
               meta: {
@@ -78,9 +79,9 @@ const router = createRouter({
               }
             },
             {
-              path: '/student',
+              path: 'student',
               name: 'student',
-              component: null,
+              component: Student,
               meta: {
                 requiresAuth: true,
                 breadcrumb: { name: 'Student' }
@@ -93,10 +94,7 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      //component: Login,
-      components: {
-        default: Login
-      }
+      component: Login
     },
     {
       path: '/:pathMatch(.*)*',
