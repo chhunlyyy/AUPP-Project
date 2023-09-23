@@ -7,6 +7,7 @@ import Profile from '@/views/profile-page.vue';
 import SdieNavigation from '@/components/side-navigation.vue';
 import Home from '@/views/home.vue';
 import Subject from '@/views/subject.vue';
+import ClassManagement from '@/views/class-management.vue';
 import { HomeIcon } from "@heroicons/vue/24/outline";
 
 
@@ -59,6 +60,33 @@ const router = createRouter({
             requiresAuth: true,
             breadcrumb: {name: 'Subject'}
           }
+        },
+        {
+          path: '/class-management',
+          component: ClassManagement,
+          meta: {
+            breadcrumb: {name: 'Class management'}
+          },
+          children: [
+            {
+              path: '/class',
+              name: 'class',
+              component: ClassManagement,
+              meta: {
+                requiresAuth: true,
+                breadcrumb: { name: 'Class' }
+              }
+            },
+            {
+              path: '/student',
+              name: 'student',
+              component: null,
+              meta: {
+                requiresAuth: true,
+                breadcrumb: { name: 'Student' }
+              }
+            }
+          ]
         }
       ]
     },

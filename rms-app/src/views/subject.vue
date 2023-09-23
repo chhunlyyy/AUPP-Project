@@ -17,7 +17,7 @@
         </div>
         <div class="mt-3 flex gap-3 justify-end">
           <Button @click="subjectForm.id ? handleUpdate() : handleCreate()"
-            :label="subjectForm.id ? 'Update' : 'Create'"></Button>
+            :label="subjectForm.id ? 'Update' : 'Create'" :disabled="!subjectForm.name"></Button>
           <Button @click="handleClear" label="Clear" severity="danger"
             v-if="subjectForm.name || subjectForm.description" />
         </div>
