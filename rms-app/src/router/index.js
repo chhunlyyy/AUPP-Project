@@ -8,7 +8,6 @@ import SdieNavigation from '@/components/side-navigation.vue';
 import Home from '@/views/home.vue';
 import Subject from '@/views/subject.vue';
 import { HomeIcon } from "@heroicons/vue/24/outline";
-// import { markRaw } from 'vue';
 
 
 const router = createRouter({
@@ -19,7 +18,7 @@ const router = createRouter({
     {
       path: '/',
       components: {
-        dashboard: SdieNavigation
+        dashboard: SdieNavigation,
       },
       meta: {
         breadcrumb: {name: '', icon: HomeIcon}

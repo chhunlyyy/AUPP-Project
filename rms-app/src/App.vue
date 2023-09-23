@@ -9,3 +9,12 @@
   import { RouterView } from 'vue-router'
   import Toast from 'primevue/toast';
 </script>
+
+<style>
+.p-button.p-component{
+  padding-left: 20px!important;
+  padding-right: 20px!important;
+  height: 38px!important;
+}
+
+</style>

@@ -12,6 +12,9 @@
     "@headlessui/vue": "^1.7.16",
     "@heroicons/vue": "^2.0.18",
     "@tailwindcss/forms": "^0.5.6",
+    "axios": "^1.5.0",
+    "axis": "^1.0.0",
+    "primeicons": "^6.0.1",
     "primevue": "^3.34.1",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"

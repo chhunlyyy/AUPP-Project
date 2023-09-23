@@ -95,19 +95,7 @@
         <router-view v-slot="{Component, route}">          
           <transition name="fade" mode="out-in">
             <div :key="route.name" :class="[route.meta?.class ? route.meta.class : 'pl-3 pt-3 pr-3','h-full']">
-              <nav v-if="crumbs?.length > 0" class="flex mb-2" key="static">
-                <ol role="list" class="flex items-center space-x-4">
-                  <li v-for="(crumb, index) in crumbs" :key="crumb.label">
-                    <div class="flex items-center">
-                      <router-link :to="crumb.to" class="bg-white"><component v-if="crumb.icon" :is="crumb.icon" class="h-6 w-6 shrink-0"/> <span class="text-black text-sm font-medium hover:text-gray-700">{{ crumb?.label }}</span></router-link>
-                      <svg v-if="crumbs.length-1 > index" class="h-5 w-5 flex-shrink-0 text-gray-300" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                        <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
-                      </svg>
-                    </div>
-                  </li>
-                </ol>
-              </nav>
-              <component :is='Component'></component>          
+              <component :is='Component'></component>
             </div>
           </transition>
         </router-view>
@@ -133,12 +121,8 @@ import {
   XMarkIcon,
 } from '@heroicons/vue/24/outline';
 import UserProfile from '@/components/user-profile.vue';
-import { useRouter, useRoute } from 'vue-router';
-import { computed } from 'vue';
 
 const sidebarOpen = ref(false);
-const router = useRouter();
-const route = useRoute();
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: HomeIcon},
@@ -146,19 +130,6 @@ const navigation = [
   { name: 'Subjects', href: '/subjects', icon: BriefcaseIcon},
   // { name: 'Score', href: '/score', icon: ChartPieIcon}
 ];
-
-const crumbs = computed(() => {
-  
-  let matchedRoutes = route.matched.map(itemRoute => ({
-    to: itemRoute.path,
-    label: itemRoute.meta.breadcrumb?.name,
-    icon: itemRoute.meta.breadcrumb?.icon
-  }));
-
-  return matchedRoutes.find((element, index) => element?.label == undefined) ? null : matchedRoutes;
-});
-
-
 </script>
 
 <style>
