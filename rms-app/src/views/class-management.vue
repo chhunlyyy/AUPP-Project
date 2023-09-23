@@ -81,7 +81,6 @@ const color = [
   'green',
   'pink',
   'blue',
-  'emerald',
   'gray'
 ]
 
