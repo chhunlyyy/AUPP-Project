@@ -30,7 +30,10 @@ const props = defineProps({
 const selectedData = ref();
 const metaKey = ref(true);
 
-defineExpose({ selectedData })
+defineExpose({ 
+  selectedData,
+  clearSelectedData: () => selectedData.value = null
+})
 </script>
 
 <style>
