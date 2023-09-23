@@ -2,7 +2,6 @@ package com.example.adminservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,7 +24,7 @@ public class StudentEntity {
     private int user_id;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "user_id",referencedColumnName = "id",insertable=false, updatable=false)
     StudentDetailEntity detail;
 

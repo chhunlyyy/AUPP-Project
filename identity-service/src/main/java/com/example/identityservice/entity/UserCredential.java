@@ -1,6 +1,5 @@
 package com.example.identityservice.entity;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,7 +29,7 @@ public class UserCredential {
     private String address;
     private int role_id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "role_id",referencedColumnName = "id",insertable=false, updatable=false)
     private RoleEntity role;
 }

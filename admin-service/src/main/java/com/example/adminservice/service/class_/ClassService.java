@@ -43,4 +43,6 @@ public interface ClassService {
      */
     public ResponseEntity<Object> delete(int id);
 
+    ResponseEntity<Object> list();
+
 }

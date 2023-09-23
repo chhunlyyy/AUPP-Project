@@ -76,4 +76,9 @@ public class ClassServiceImpl implements ClassService {
         }
     }
 
+    @Override
+    public ResponseEntity<Object> list() {
+        return ResponeHandler.generateResponse("", HttpStatus.OK, repo.findAll());
+    }
+
 }

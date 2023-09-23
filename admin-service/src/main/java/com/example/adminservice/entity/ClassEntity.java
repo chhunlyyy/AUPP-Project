@@ -2,7 +2,6 @@ package com.example.adminservice.entity;
 
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,9 +32,13 @@ public class ClassEntity {
     private int teacher_id;
     private int subject_id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "teacher_id",referencedColumnName = "id",insertable=false, updatable=false)
     LecturerEntity teacher;
+
+    @OneToOne()
+    @JoinColumn(name = "subject_id", referencedColumnName = "id", insertable=false, updatable=false)
+    SubjectEntity subject;
 
     @OneToMany(mappedBy = "classEntity")
     List<StudentEntity> students;

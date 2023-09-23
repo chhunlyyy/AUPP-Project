@@ -55,5 +55,10 @@ public class ClassController {
     public ResponseEntity<Object> enrollStudent(@RequestBody List<StudentEntity> studentEntities) {
         return studentService.enrole(studentEntities);
     }
+
+    @GetMapping("/list")
+    public ResponseEntity<Object> list() {
+        return service.list();
+    }
    
 }
