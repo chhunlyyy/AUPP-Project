@@ -46,5 +46,7 @@ public interface ClassService {
     public ResponseEntity<Object> removeStudent(int id);
 
     ResponseEntity<Object> list();
+    
+    ResponseEntity<Object> getEnrollment();
 
 }

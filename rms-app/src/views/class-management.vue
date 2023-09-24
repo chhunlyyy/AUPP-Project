@@ -16,8 +16,8 @@
         <InputText id="name" :value="classForm.name" v-model="classForm.name" class="w-full mt-1" />
       </div>
       <div class="mt-3">
-        <label for="name">Assign lecturer</label>
-        <Dropdown v-model="classForm.teacher" :options="teacherList" optionLabel="name" placeholder="Choose teacher" class="mt-1 w-full md:w-14rem">
+        <label for="name">Assign to lecturer</label>
+        <Dropdown v-model="classForm.teacher" :options="teacherList" optionLabel="name" class="mt-1 w-full md:w-14rem">
           <template #value="slotProps">
             <div v-if="slotProps.value">
               <span :class="[`bg-${color[Math.floor(Math.random() * color.length)]}-500`, 'inline-flex h-6 w-6 items-center justify-center rounded-full']">
@@ -29,7 +29,6 @@
                 {{ slotProps.value.name }}
               </span>
             </div>
-            <span v-else> {{ slotProps.placeholder }} </span>
           </template>
           <template #option="slotProps">
             <span :class="[`bg-${color[Math.floor(Math.random() * color.length)]}-500`, 'inline-flex h-9 w-9 items-center justify-center rounded-full']">
@@ -100,6 +99,7 @@
         </template>
         <Column expander style="width: 5rem"/>
         <Column field="teacher.id" header="Teacher"></Column>
+        <Column field="id" header="ID" style="width: 5%"></Column>
         <Column field="name" header="Name" style="width: 30%"></Column>
         <Column field="students" header="No." style="width: 10%">
           <template #body="slotProps">
@@ -116,8 +116,10 @@
         <Column field="description" class="text-ellipsis overflow-hidden" header="Description"></Column>
         <template #groupfooter="slotProps">
           <div class="flex justify-content-end font-bold w-full">Total class: {{ slotProps.index + 1 }}</div>
-        </template>        
+        </template>   
+        <!-- sub datatable -->
         <template #expansion="slotProps">
+          <p class="font-medium">Student list</p>
           <div class="p-3">
             <DataTable 
               :value="slotProps.data?.students"

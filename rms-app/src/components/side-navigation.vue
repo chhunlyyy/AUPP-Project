@@ -191,8 +191,8 @@ const navigation = computed(() => ([
       icon: RectangleGroupIcon,
       current: currentUrl.value,
       children: [
-        { name: 'Class', href: ''},
-        { name: 'Student', href: '/student'}
+        { name: 'Class Control', href: ''},
+        { name: 'Enrollment', href: '/enrollment'}
       ],
     }
   ]));

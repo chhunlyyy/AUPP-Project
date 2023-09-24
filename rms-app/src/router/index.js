@@ -9,6 +9,7 @@ import Home from '@/views/home.vue';
 import Subject from '@/views/subject.vue';
 import ClassManagement from '@/views/class-management.vue';
 import Student from '@/views/student.vue';
+import Enrollment from '@/views/enrollment.vue';
 import { HomeIcon } from "@heroicons/vue/24/outline";
 
 
@@ -75,16 +76,16 @@ const router = createRouter({
               component: ClassManagement,
               meta: {
                 requiresAuth: true,
-                breadcrumb: { name: 'Class' }
+                breadcrumb: { name: 'Class Control' }
               }
             },
             {
-              path: 'student',
-              name: 'student',
-              component: Student,
+              path: 'enrollment',
+              name: 'Enrollment',
+              component: Enrollment,
               meta: {
                 requiresAuth: true,
-                breadcrumb: { name: 'Student' }
+                breadcrumb: { name: 'Enrollment' }
               }
             }
           ]
