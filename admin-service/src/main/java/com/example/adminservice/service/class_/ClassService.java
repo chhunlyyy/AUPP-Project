@@ -42,6 +42,8 @@ public interface ClassService {
      * @return
      */
     public ResponseEntity<Object> delete(int id);
+    
+    public ResponseEntity<Object> removeStudent(int id);
 
     ResponseEntity<Object> list();
 

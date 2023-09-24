@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.teacherservice.entity.ResultEntity;
 
-@Service
 public interface ResultService {
      public ResponseEntity<Object> addResult(List<ResultEntity> entites);
       public ResponseEntity<Object> getResult(int examId,int classId);

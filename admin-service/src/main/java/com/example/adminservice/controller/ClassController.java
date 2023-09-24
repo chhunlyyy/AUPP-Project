@@ -50,6 +50,10 @@ public class ClassController {
     public ResponseEntity<Object> delete(@RequestParam int id) {
         return service.delete(id);
     }
+    @DeleteMapping("/remove-student")
+    public ResponseEntity<Object> removeStudent(@RequestParam int id) {
+        return service.removeStudent(id);
+    }
 
     @PostMapping("/enroll-student")
     public ResponseEntity<Object> enrollStudent(@RequestBody List<StudentEntity> studentEntities) {

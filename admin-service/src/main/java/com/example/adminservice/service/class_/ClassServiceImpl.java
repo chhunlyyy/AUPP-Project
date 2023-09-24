@@ -9,11 +9,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.adminservice.entity.ClassEntity;
+import com.example.adminservice.entity.StudentEntity;
 import com.example.adminservice.helper.ResponeHandler;
 import com.example.adminservice.repository.ClassRepository;
+import com.example.adminservice.repository.StudentRepository;
 
 @Service
 public class ClassServiceImpl implements ClassService {
+
+    @Autowired
+    private StudentRepository studentRepository;
 
     @Autowired
     private ClassRepository repo;
@@ -81,4 +86,17 @@ public class ClassServiceImpl implements ClassService {
         return ResponeHandler.generateResponse("", HttpStatus.OK, repo.findAll());
     }
 
+    @Override
+    public ResponseEntity<Object> removeStudent(int id) {
+        Optional<StudentEntity> student = studentRepository.findById(id);
+
+        if (student.isPresent()) {
+            studentRepository.flush();
+            studentRepository.delete(student.get());
+            return ResponeHandler.generateResponse(null, HttpStatus.OK, null);
+        }
+        else {
+            return ResponeHandler.generateResponse("Student Not Exist", HttpStatus.EXPECTATION_FAILED, null);
+        }
+    }
 }
