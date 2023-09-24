@@ -19,6 +19,12 @@ public interface ExamService {
      */
     public ResponseEntity<Object> examByClass(int classId);
 
+     /**
+     * 
+     * @return
+     */
+    public ExamEntity examById(int examId);
+
     /**
      * 
      * @param examEntity
