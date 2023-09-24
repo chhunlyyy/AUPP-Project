@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.example.adminservice.entity.ClassEntity;
 import com.example.adminservice.entity.ExamEntity;
 import com.example.adminservice.helper.ResponeHandler;
 import com.example.adminservice.repository.ExamRepository;
@@ -72,6 +71,11 @@ public class ExamServiceImpl implements ExamService {
         } else {
             return ResponeHandler.generateResponse("", HttpStatus.OK, results);
         }
+    }
+
+    @Override
+    public ExamEntity examById(int examId) {
+      return repo.findById(examId).get();
     }
 
 }
