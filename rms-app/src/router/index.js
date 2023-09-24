@@ -46,6 +46,15 @@ const router = createRouter({
           }
         },        
         {
+          path: 'students',
+          name: 'student',
+          component: Student,
+          meta: {
+            requiresAuth: true,
+            breadcrumb: {name: 'Student'}
+          }
+        },        
+        {
           path: 'subjects',
           name: 'subject',
           component: Subject,

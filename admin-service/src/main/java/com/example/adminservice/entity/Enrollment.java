@@ -15,10 +15,12 @@ public class Enrollment {
     private Integer user_id;
     private Integer class_id;
     private Integer subject_id;
+    private Integer teacher_id;
     private String name;
     private String email;
     private String phone;
     private String address;
     private String class_name;
     private String subject_name;
+    private String teacher_name;
 }
