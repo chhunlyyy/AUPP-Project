@@ -39,7 +39,6 @@ import Datatable from '@/components/datatable.vue';
 import axios from 'axios';
 import { useSessionLogin } from '@/composables/auth';
 import { useToast } from "primevue/usetoast";
-import ConfirmDelete from '@/components/confirm-delete.vue';
 
 const toast = useToast();
 const datatableRef = ref({});
@@ -59,6 +58,7 @@ const submitDelete = () => {
     if (response.data.status == 200) {
       toast.add({ severity: 'success', summary: 'Delete successfully.', life: 3000 });
       fetchData();
+      handleClear()
     }
   })
   .finally(() => {
@@ -125,7 +125,7 @@ const handleDelete = () => {
       'Authorization': `Bearer ${token.value}`
     }
   })
-  .delete(`/admin/subject/delete?id=${selectedData.value?.id}`);
+  .delete(`/admin/subject/delete?id=${selectedData.value?.id}`)
 }
 
 const handleUpdate = () => {
@@ -139,6 +139,7 @@ const handleUpdate = () => {
       if (response.data.status == 200) {
         toast.add({ severity: 'success', summary: 'Update successfully.', life: 3000 });
         fetchData();
+        handleClear();
       }
     })
 }
@@ -157,6 +158,7 @@ const handleCreate = () => {
       if (response.data.status == 200) {
         toast.add({ severity: 'success', summary: 'Create successfully.', life: 3000 });
         fetchData();
+        handleClear();
       }
     });
 }

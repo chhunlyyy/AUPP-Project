@@ -13,7 +13,8 @@ const props = defineProps({options: {
   default: {
     show: false,
     loading: false,
-    disabled: false
+    disabled: false,
+    message: null
   }
 }});
 
@@ -21,7 +22,7 @@ const confirmBuilder = computed(() => {
   return {
     show: props.options?.show,
     title: 'Delete',
-    message: 'Are you sure want to delete?',
+    message: props.options?.message ? props.options?.message : "Are you sure want to delete?",
     icon: ICON.DANGER,
     actions: [
       {

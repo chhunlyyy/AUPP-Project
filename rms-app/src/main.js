@@ -15,6 +15,8 @@ import Textarea from 'primevue/textarea';
 import axios from 'axios';
 import Dialog from 'primevue/dialog';
 import Divider from 'primevue/divider';
+import Dropdown from 'primevue/dropdown';
+import ConfirmDelete from '@/components/confirm-delete.vue';
 
 //theme
 import 'primevue/resources/themes/saga-blue/theme.css';
@@ -39,5 +41,7 @@ app.component("InputText", InputText);
 app.component("Textarea", Textarea);
 app.component("Dialog", Dialog);
 app.component("Divider", Divider);
+app.component("Dropdown", Dropdown);
+app.component("ConfirmDelete", ConfirmDelete);
 
 app.mount('#app')
