@@ -8,11 +8,13 @@ import ToastService from 'primevue/toastservice';
 import Button from 'primevue/button';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
-import ColumnGroup from 'primevue/columngroup';   // optional
-import Row from 'primevue/row';                   // optional
+import ColumnGroup from 'primevue/columngroup';   
+import Row from 'primevue/row';                  
 import InputText from 'primevue/inputtext';
 import Textarea from 'primevue/textarea';
-import axios from 'axios'
+import axios from 'axios';
+import Dialog from 'primevue/dialog';
+import Divider from 'primevue/divider';
 
 //theme
 import 'primevue/resources/themes/saga-blue/theme.css';
@@ -35,5 +37,7 @@ app.component("ColumnGroup", ColumnGroup);
 app.component("Row", Row);
 app.component("InputText", InputText);
 app.component("Textarea", Textarea);
+app.component("Dialog", Dialog);
+app.component("Divider", Divider);
 
 app.mount('#app')
