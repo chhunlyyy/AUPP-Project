@@ -6,6 +6,7 @@ import Error404 from '@/components/404.vue';
 import Profile from '@/views/profile-page.vue';
 import SdieNavigation from '@/components/side-navigation.vue';
 import Home from '@/views/home.vue';
+import Exam from '@/views/exam.vue';
 import Subject from '@/views/subject.vue';
 import ClassManagement from '@/views/class-management.vue';
 import Student from '@/views/student.vue';
@@ -43,7 +44,16 @@ const router = createRouter({
             requiresAuth: true,
             breadcrumb: {name: 'Lecturer'}
           }
-        },        
+        },   
+        {
+          path: 'exam',
+          name: 'exam',
+          component: Exam,
+          meta: {
+            requiresAuth: true,
+            breadcrumb: {name: 'Exam'}
+          }
+        },     
         {
           path: 'subjects',
           name: 'subject',

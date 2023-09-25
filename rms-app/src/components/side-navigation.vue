@@ -169,6 +169,7 @@ import {
   BriefcaseIcon,
   XMarkIcon,
   RectangleGroupIcon,
+  PencilSquareIcon,
 } from '@heroicons/vue/24/outline';
 
 import { ChevronRightIcon } from '@heroicons/vue/20/solid'
@@ -184,6 +185,7 @@ const currentUrl = computed(() => {
 const navigation = computed(() => ([
     { name: 'Dashboard', href: '/', icon: HomeIcon },
     { name: 'Lecturers', href: 'lecturers', icon: UsersIcon },
+    { name: 'Exam', href: '/exam', icon: PencilSquareIcon },
     { name: 'Subjects', href: '/subjects', icon: BriefcaseIcon },
     {
       name: 'Class Management',
