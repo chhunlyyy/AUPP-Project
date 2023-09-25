@@ -39,13 +39,12 @@ import Datatable from '@/components/datatable.vue';
 import axios from 'axios';
 import { useSessionLogin } from '@/composables/auth';
 import { useToast } from "primevue/usetoast";
+const { token } = useSessionLogin();
 
 const toast = useToast();
 const datatableRef = ref({});
 const subjects = ref([]);
 const selectedData = ref(null);
-
-const { token } = useSessionLogin();
 
 const subjectForm = reactive({
   id: null,

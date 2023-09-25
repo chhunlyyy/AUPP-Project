@@ -16,8 +16,8 @@
         <InputText id="name" :value="classForm.name" v-model="classForm.name" class="w-full mt-1" />
       </div>
       <div class="mt-3">
-        <label for="name">Assign lecturer</label>
-        <Dropdown v-model="classForm.teacher" :options="teacherList" optionLabel="name" placeholder="Choose teacher" class="mt-1 w-full md:w-14rem">
+        <label for="name">Assign to lecturer</label>
+        <Dropdown v-model="classForm.teacher" :options="teacherList" optionLabel="name" class="mt-1 w-full md:w-14rem">
           <template #value="slotProps">
             <div v-if="slotProps.value">
               <span :class="[`bg-${color[Math.floor(Math.random() * color.length)]}-500`, 'inline-flex h-6 w-6 items-center justify-center rounded-full']">
@@ -29,7 +29,6 @@
                 {{ slotProps.value.name }}
               </span>
             </div>
-            <span v-else> {{ slotProps.placeholder }} </span>
           </template>
           <template #option="slotProps">
             <span :class="[`bg-${color[Math.floor(Math.random() * color.length)]}-500`, 'inline-flex h-9 w-9 items-center justify-center rounded-full']">
@@ -90,7 +89,7 @@
           <span class="vertical-align-middle ml-2 font-bold line-height-3 capitalize">
             {{ slotProps?.data?.teacher?.name}}
           </span>
-          <span v-for="(classItem, index) in classList" :key="index"
+          <span v-for="(classItem, index) in classList.filter(item => item?.teacher?.id == slotProps?.data?.teacher?.id)" :key="index"
             class="ml-5 inline-flex items-center gap-x-1.5 rounded-md px-2 py-1 text-xs font-medium text-gray-900 ring-1 ring-inset ring-gray-200">
             <svg class="h-1.5 w-1.5 fill-green-500" viewBox="0 0 6 6" aria-hidden="true">
               <circle cx="3" cy="3" r="3" />
@@ -100,6 +99,7 @@
         </template>
         <Column expander style="width: 5rem"/>
         <Column field="teacher.id" header="Teacher"></Column>
+        <Column field="id" header="ID" style="width: 5%"></Column>
         <Column field="name" header="Name" style="width: 30%"></Column>
         <Column field="students" header="No." style="width: 10%">
           <template #body="slotProps">
@@ -115,9 +115,11 @@
         <Column field="subject.name" header="Subject" style="width: 20%"></Column>
         <Column field="description" class="text-ellipsis overflow-hidden" header="Description"></Column>
         <template #groupfooter="slotProps">
-          <div class="flex justify-content-end font-bold w-full">Total class: {{ slotProps.index + 1 }}</div>
-        </template>        
+          <span>Total class: <span class="inline-flex items-center rounded-md bg-green-100 px-1.5 py-0.5 text-xs font-medium text-green-800">{{ classList.filter(item => item?.teacher?.id == slotProps?.data?.teacher?.id)?.length }}</span></span>
+        </template>   
+        <!-- sub datatable -->
         <template #expansion="slotProps">
+          <p class="font-medium">Student list</p>
           <div class="p-3">
             <DataTable 
               :value="slotProps.data?.students"
@@ -247,7 +249,7 @@ const fetchData = () => {
     headers: {
       'Authorization': `Bearer ${token.value}`
     }
-  }).get("/teacher/result/get-lecturer").then(response => {
+  }).get("/teacher/get-lecturer").then(response => {
     if (response.data.status == 200) {
       teacherList.value = response.data.data;
     }

@@ -151,7 +151,7 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
+import { useRoute } from 'vue-router';
 import {
   Dialog,
   DialogPanel,
@@ -184,17 +184,23 @@ const currentUrl = computed(() => {
 
 const navigation = computed(() => ([
     { name: 'Dashboard', href: '/', icon: HomeIcon },
+
     { name: 'Lecturers', href: 'lecturers', icon: UsersIcon },
     { name: 'Exam', href: '/exam', icon: PencilSquareIcon },
     { name: 'Subjects', href: '/subjects', icon: BriefcaseIcon },
+
+    { name: 'Lecturer', href: '/lecturers', icon: UsersIcon },
+    { name: 'Student', href: '/students', icon: UsersIcon },
+    { name: 'Subject', href: '/subjects', icon: BriefcaseIcon },
+
     {
       name: 'Class Management',
       href: '/class-management',
       icon: RectangleGroupIcon,
       current: currentUrl.value,
       children: [
-        { name: 'Class', href: ''},
-        { name: 'Student', href: '/student'}
+        { name: 'Class Control', href: ''},
+        { name: 'Enrollment', href: '/enrollment'}
       ],
     }
   ]));

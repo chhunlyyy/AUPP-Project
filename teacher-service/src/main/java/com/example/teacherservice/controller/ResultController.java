@@ -1,8 +1,6 @@
 package com.example.teacherservice.controller;
 
 import java.util.List;
-
-import com.example.teacherservice.service.result.LecturerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,13 +20,6 @@ public class ResultController {
     @Autowired
     private ResultService service;
 
-    @Autowired
-    private LecturerService lecturerService;
-
-    @GetMapping("/get-lecturer")
-    public ResponseEntity<Object> getLecturer() {
-        return lecturerService.getLecturer();
-    }
     @PostMapping("/add")
     public ResponseEntity<Object> add(@RequestBody List<ResultEntity> entites) {
         return service.addResult(entites);
@@ -38,5 +29,4 @@ public class ResultController {
     public ResponseEntity<Object> get(@RequestParam int examId, @RequestParam int classId) {
         return service.getResult(examId, classId);
     }
-
 }

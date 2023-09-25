@@ -12,6 +12,7 @@ import com.example.adminservice.entity.ClassEntity;
 import com.example.adminservice.entity.StudentEntity;
 import com.example.adminservice.helper.ResponeHandler;
 import com.example.adminservice.repository.ClassRepository;
+import com.example.adminservice.repository.EnrollmentRepository;
 import com.example.adminservice.repository.StudentRepository;
 
 @Service
@@ -19,6 +20,9 @@ public class ClassServiceImpl implements ClassService {
 
     @Autowired
     private StudentRepository studentRepository;
+    
+    @Autowired
+    private EnrollmentRepository enrollmentRepository;
 
     @Autowired
     private ClassRepository repo;
@@ -98,5 +102,10 @@ public class ClassServiceImpl implements ClassService {
         else {
             return ResponeHandler.generateResponse("Student Not Exist", HttpStatus.EXPECTATION_FAILED, null);
         }
+    }
+
+    @Override
+    public ResponseEntity<Object> getEnrollment() {        
+        return ResponeHandler.generateResponse("", HttpStatus.OK, enrollmentRepository.findAll());
     }
 }

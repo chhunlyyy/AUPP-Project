@@ -10,12 +10,16 @@ import org.springframework.stereotype.Service;
 import com.example.adminservice.entity.StudentEntity;
 import com.example.adminservice.helper.ResponeHandler;
 import com.example.adminservice.repository.StudentRepository;
+import com.example.adminservice.repository.StudentRoRepository;
 
 @Service
 public class StudentServiceImpl implements StudentService{
 
     @Autowired
     private StudentRepository repo;
+    
+    @Autowired
+    private StudentRoRepository studentRoRepository;
 
     @Override
     public ResponseEntity<Object> enrole(List<StudentEntity> studentEntities) {
@@ -25,4 +29,8 @@ public class StudentServiceImpl implements StudentService{
         return ResponeHandler.generateResponse("Enroll Student Successfully", HttpStatus.OK, null);
     }
     
+    @Override
+    public ResponseEntity<Object> getStudent() {
+        return ResponeHandler.generateResponse(null, HttpStatus.OK, studentRoRepository.findAll());
+    }
 }
