@@ -17,14 +17,14 @@
           <label for="phone">Phone</label>
           <InputText id="phone" :value="studentForm.phone" v-model="studentForm.phone" class="w-full mt-1" />
         </div>
-        <div class="mt-3">
+        <!-- <div class="mt-3">
           <label for="password">Password</label>
           <InputText id="password" :value="studentForm.password" v-model="studentForm.password" class="w-full mt-1" />
         </div>
         <div class="mt-3">
           <label for="confirm_password">Confirm Password</label>
           <InputText id="confirm_password" :value="studentForm.confirm_password" v-model="studentForm.confirm_password" class="w-full mt-1" />
-        </div>
+        </div> -->
         <div class="mt-3">
           <label for="address">Address</label>
           <InputText id="address" :value="studentForm.address" v-model="studentForm.address" class="w-full mt-1" />
@@ -104,7 +104,6 @@ const handleUpdate = () => {
 }
 
 const handleCreate = () => {
-
   if(studentForm.confirm_password != studentForm.password)
     toast.add({ severity: 'warn', summary: "The password doesn't match.", life: 3000 });
   else
@@ -116,6 +115,7 @@ const handleCreate = () => {
     })
     .post("/auth/register", {
       ...studentForm,
+      password: 123,
       role_id: 3
     })
     .then(response => {
@@ -136,8 +136,8 @@ const handleClear = () => {
   studentForm.name= null
   studentForm.phone= null
   studentForm.password= null
-  studentForm.address= null
   studentForm.confirm_password= null
+  studentForm.address= null
 
   datatableRef.value.clearSelectedData()
 }

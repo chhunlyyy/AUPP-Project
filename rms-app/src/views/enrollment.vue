@@ -23,20 +23,20 @@
                 <span :class="[`bg-${color[Math.floor(Math.random() * color.length)]}-500`, 'inline-flex h-6 w-6 items-center justify-center rounded-full']">
                   <span class="text-sm leading-none text-white">{{
                     slotProps.value?.name?.charAt(0)?.toUpperCase() }}
-                    </span>
+                  </span>
                 </span>
-                <span class="vertical-align-middle ml-2 font-bold line-height-3 capitalize">
+                <span class="vertical-align-middle ml-2 line-height-3 capitalize">
                   {{ slotProps.value.name }}
                 </span>
               </div>
             </template>
             <template #option="slotProps">
-              <span :class="[`bg-${color[Math.floor(Math.random() * color.length)]}-500`, 'inline-flex h-9 w-9 items-center justify-center rounded-full']">
-                  <span class="text-lg font-medium leading-none text-white">{{
-                    slotProps.option?.name?.charAt(0)?.toUpperCase() }}
-                  </span>
+              <span :class="[`bg-${color[Math.floor(Math.random() * color.length)]}-500`, 'inline-flex h-6 w-6 items-center justify-center rounded-full']">
+                <span class="text-lg font-medium leading-none text-white">{{
+                  slotProps.option?.name?.charAt(0)?.toUpperCase() }}
+                </span>
               </span>
-              <span class="vertical-align-middle ml-2 font-bold line-height-3 capitalize">{{ slotProps.option.name }}</span>
+              <span class="vertical-align-middle ml-2 line-height-3 capitalize">{{ slotProps.option.name }}</span>
             </template>
           </Dropdown>
           <small>Does the student not exist? <span class="font-medium text-blue-500 cursor-pointer" @click="toast.add({ severity: 'info', summary: 'Available soon!', life: 3000 })">Create New</span></small> 
@@ -51,7 +51,6 @@
           <Button @click="selectedEnrollmentData ? handleUpdate() : handleCreate()" :label="selectedEnrollmentData ? 'Update' : 'Create'" :disabled="!(enrollForm.student && enrollForm.class)"></Button>
           <Button @click="handleClear" label="Clear" severity="danger" v-if="enrollForm.student || enrollForm.class" />
         </div>
-
       </div>      
     </div>
 
@@ -161,28 +160,39 @@ watchEffect(() => {
 });
 
 const groupTeacher = computed(() => {
-  if (classList.value?.length > 0) {
-    return classList.value?.reduce((group, item) => {
-      if(!group?.length) {
+  if (Array.isArray(classList.value)) {
+    return classList.value.reduce((group, item) => {
+      if(group.length == 0) {
         group = [
           {
-            id: item?.teacher_id,
+            id: item?.teacher?.id,
             label: item?.teacher?.name,
             items: classList.value.filter(c => c.teacher_id == item?.teacher_id)
           }
         ];
       }
-      else if (group.indexOf(g => g?.id == item?.teacher_id) == -1) {
-        group.push({
-          id: item?.teacher_id,
-          label: item?.teacher.name,
-          items: classList.value.filter(c => c.teacher_id == item?.teacher_id)
-        })
+      else {
+        let index = group.findIndex(g => g.id == item?.teacher_id);
+        if(index > -1) {
+          group[index] = {
+            ...group[index],
+            items: classList.value.filter(c => c.teacher_id == item?.teacher_id)
+          };
+        }
+        else {
+          group.push({
+            id: item?.teacher?.id,
+            label: item?.teacher?.name,
+            items: classList.value.filter(c => c.teacher_id == item?.teacher_id)
+          })
+        }
       }
       return group;
-    })    
+    }, []);
   }
-  else return []
+  else {
+    return []
+  }
 })
 
 const handleUpdate = () => {

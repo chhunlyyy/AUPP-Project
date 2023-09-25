@@ -31,7 +31,7 @@
             </div>
           </template>
           <template #option="slotProps">
-            <span :class="[`bg-${color[Math.floor(Math.random() * color.length)]}-500`, 'inline-flex h-9 w-9 items-center justify-center rounded-full']">
+            <span :class="[`bg-${color[Math.floor(Math.random() * color.length)]}-500`, 'inline-flex h-7 w-7 items-center justify-center rounded-full']">
                 <span class="text-lg font-medium leading-none text-white">{{
                   slotProps.option?.name?.charAt(0)?.toUpperCase() }}
                 </span>
@@ -82,7 +82,7 @@
       >
         <template #groupheader="slotProps">
           <span
-            :class="[`bg-${color[Math.floor(Math.random() * color.length)]}-500`, 'inline-flex h-10 w-10 items-center justify-center rounded-full']">
+            :class="[`bg-${color[Math.floor(Math.random() * color.length)]}-500`, 'inline-flex h-9 w-9 items-center justify-center rounded-full']">
             <span class="text-lg font-medium leading-none text-white">{{
               slotProps.data?.teacher?.name?.charAt(0)?.toUpperCase() }}</span>
           </span>
