@@ -74,7 +74,7 @@
     </TransitionRoot>
 
     <!-- Static sidebar for desktop -->
-    <div class="hidden lg:fixed lg:inset-y-0 lg:z-40 lg:flex lg:w-72 lg:flex-col">
+    <div class="hidden lg:fixed lg:inset-y-0 lg:z-40 lg:flex lg:w-60 lg:flex-col">
       <!-- Sidebar component, swap this element with another sidebar if you like -->
       <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4">
         <div class="flex h-16 shrink-0 items-center mt-2">
@@ -123,7 +123,7 @@
       </div>
     </div>
 
-    <div class="lg:pl-72  flex flex-col" style="height: 100vh;">
+    <div class="lg:pl-60 flex flex-col" style="height: 100vh;">
       <div
         class="sticky z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
         <button type="button" class="-m-2.5 p-2.5 text-gray-700 lg:hidden" @click="sidebarOpen = true">
@@ -173,8 +173,10 @@ import {
 } from '@heroicons/vue/24/outline';
 
 import { ChevronRightIcon } from '@heroicons/vue/20/solid'
-
 import UserProfile from '@/components/user-profile.vue';
+import { useSessionLogin } from '@/composables/auth';
+const { roleId } = useSessionLogin();
+
 const route = useRoute();
 const sidebarOpen = ref(false);
 
@@ -183,27 +185,24 @@ const currentUrl = computed(() => {
 })
 
 const navigation = computed(() => ([
-    { name: 'Dashboard', href: '/', icon: HomeIcon },
-
-    { name: 'Lecturers', href: 'lecturers', icon: UsersIcon },
-    { name: 'Exam', href: '/exam', icon: PencilSquareIcon },
-    { name: 'Subjects', href: '/subjects', icon: BriefcaseIcon },
-
-    { name: 'Lecturer', href: '/lecturers', icon: UsersIcon },
-    { name: 'Student', href: '/students', icon: UsersIcon },
-    { name: 'Subject', href: '/subjects', icon: BriefcaseIcon },
-
+    { name: 'Dashboard', href: '/', icon: HomeIcon, roleId: [1,2] },
+    { name: 'Lecturers', href: 'lecturers', icon: UsersIcon, roleId: [1] },
+    { name: 'Exam', href: '/exam', icon: PencilSquareIcon, roleId: [1, 2] },
+    { name: 'Subjects', href: '/subjects', icon: BriefcaseIcon, roleId: [1] },
+    { name: 'Student', href: '/students', icon: UsersIcon, roleId: [1] },
     {
       name: 'Class Management',
       href: '/class-management',
       icon: RectangleGroupIcon,
       current: currentUrl.value,
+      roleId: [1],
       children: [
         { name: 'Class Control', href: ''},
         { name: 'Enrollment', href: '/enrollment'}
       ],
     }
-  ]));
+].filter(item => item.roleId?.includes(roleId.value))
+));
 
 </script>
 

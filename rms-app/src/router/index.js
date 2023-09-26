@@ -43,6 +43,7 @@ const router = createRouter({
           component: Lecturer,
           meta: {
             requiresAuth: true,
+            roleId: [1],
             breadcrumb: {name: 'Lecturer'}
           }
         },   
@@ -52,6 +53,7 @@ const router = createRouter({
           component: Exam,
           meta: {
             requiresAuth: true,
+            roleId: [1, 2],
             breadcrumb: {name: 'Exam'}
           }
         },     
@@ -61,6 +63,7 @@ const router = createRouter({
           component: Student,
           meta: {
             requiresAuth: true,
+            roleId: [1],
             breadcrumb: {name: 'Student'}
           }
         },        
@@ -70,6 +73,7 @@ const router = createRouter({
           component: Subject,
           meta: {
             requiresAuth: true,
+            roleId: [1],
             breadcrumb: {name: 'Subject'}
           }
         },        
@@ -86,6 +90,7 @@ const router = createRouter({
           path: 'class-management',
           meta: {
             requiresAuth: true,
+            roleId: [1],
             breadcrumb: { name: 'Class management' }
           },
           children: [
@@ -95,6 +100,7 @@ const router = createRouter({
               component: ClassManagement,
               meta: {
                 requiresAuth: true,
+                roleId: [1],
                 breadcrumb: { name: 'Class Control' }
               }
             },
@@ -104,6 +110,7 @@ const router = createRouter({
               component: Enrollment,
               meta: {
                 requiresAuth: true,
+                roleId: [1],
                 breadcrumb: { name: 'Enrollment' }
               }
             }
@@ -137,11 +144,17 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const { isAuthenticated } = useSessionLogin();
+  const { isAuthenticated, roleId } = useSessionLogin();
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
 
   if (requiresAuth && !isAuthenticated.value) {
     next('/login');
+  }
+  else if(Array.isArray(to.meta?.roleId)) {
+    if(to.meta?.roleId.includes(1))
+      next();
+    else 
+      next("/404")
   }
   else {
     next();

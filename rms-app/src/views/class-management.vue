@@ -97,7 +97,7 @@
             {{ classItem.name }}
           </span>
         </template>
-        <Column expander style="width: 5rem"/>
+        <Column expander style="width: 2rem"/>
         <Column field="teacher.id" header="Teacher"></Column>
         <Column field="id" header="ID" style="width: 5%"></Column>
         <Column field="name" header="Name" style="width: 30%"></Column>
