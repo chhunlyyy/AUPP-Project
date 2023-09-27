@@ -39,7 +39,7 @@
               <span class="vertical-align-middle ml-2 line-height-3 capitalize">{{ slotProps.option.name }}</span>
             </template>
           </Dropdown>
-          <small>Does the student not exist? <span class="font-medium text-blue-500 cursor-pointer" @click="toast.add({ severity: 'info', summary: 'Available soon!', life: 3000 })">Create New</span></small> 
+          <small>Does the student not exist? <router-link :to="{name:'student'}" class="font-medium text-blue-500 cursor-pointer">Create New</router-link></small> 
         </div>
 
         <div class="mt-3">
@@ -110,6 +110,7 @@
 </template>
 
 <script setup>
+import Button from 'primevue/button';
 import { watchEffect, ref, onMounted, computed, reactive } from 'vue';
 import axios from 'axios';
 import { useSessionLogin } from '@/composables/auth';
@@ -131,6 +132,7 @@ const color = [
 ];
 
 const enrollForm = reactive({
+  id: null,
   student: null,
   class: null
 });
@@ -155,6 +157,7 @@ const toolbarActions = computed(() => ([
 ]));
 
 watchEffect(() => {
+  enrollForm.id = selectedEnrollmentData.value?.id
   enrollForm.student = studentList.value.filter(student => student.id == selectedEnrollmentData.value?.user_id)[0];
   enrollForm.class = classList.value.filter(_class => _class.id == selectedEnrollmentData.value?.class_id)[0];
 });
@@ -196,7 +199,23 @@ const groupTeacher = computed(() => {
 })
 
 const handleUpdate = () => {
-  toast.add({ severity: 'info', summary: 'Available soon!', life: 3000 });
+  axios.create({
+    headers: {
+      'Authorization': `Bearer ${token.value}`
+    }
+  })
+  .post("/admin/class/update-enroll-student", {
+    id: enrollForm.id,
+    user_id: enrollForm.student.id,
+    class_id: enrollForm.class.id
+  })
+  .then(response => {
+    if (response.data.status == 200) {
+      toast.add({ severity: 'success', summary: 'Update successfully.', life: 3000 });
+      fetchData();
+      handleClear();
+    }
+  })
 }
 
 const handleCreate = () => {

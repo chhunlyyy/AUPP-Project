@@ -1,6 +1,7 @@
 package com.example.adminservice.service.student;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,5 +33,21 @@ public class StudentServiceImpl implements StudentService{
     @Override
     public ResponseEntity<Object> getStudent() {
         return ResponeHandler.generateResponse(null, HttpStatus.OK, studentRoRepository.findAll());
+    }
+
+    @Override
+    public ResponseEntity<Object> updateEnrollment(StudentEntity enrollment) {
+        Optional<StudentEntity> item = repo.findById(enrollment.getId());
+        
+        if(item.isPresent()) {
+            item.get().setClass_id(enrollment.getClass_id());
+            item.get().setUser_id(enrollment.getUser_id());
+            repo.save(item.get());
+
+            return ResponeHandler.generateResponse(null, HttpStatus.OK, null);        
+        }
+        else {
+            return ResponeHandler.generateResponse(null, HttpStatus.EXPECTATION_FAILED, null);        
+        }
     }
 }

@@ -60,6 +60,11 @@ public class ClassController {
         return studentService.enrole(studentEntities);
     }
     
+    @PostMapping("/update-enroll-student")
+    public ResponseEntity<Object> enrollStudent(@RequestBody StudentEntity enrollment) {
+        return studentService.updateEnrollment(enrollment);
+    }
+    
     @GetMapping("/get-enrollment")
     public ResponseEntity<Object> getEnrollment() {
         return service.getEnrollment();

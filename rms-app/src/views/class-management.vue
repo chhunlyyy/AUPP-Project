@@ -196,16 +196,16 @@ const toolbarActions = computed(() => ([
       showDialog.value = true      
     }
   },
-  {
-    label: "Remove",
-    style: "",
-    icon: "pi pi-trash",
-    severity: "danger",
-    disabled: selectedClassData.value != null ? false: true,
-    procced: (event) => {
-      deleteOptions.show = true
-    }
-  }
+  // {
+  //   label: "Remove",
+  //   style: "",
+  //   icon: "pi pi-trash",
+  //   severity: "danger",
+  //   disabled: selectedClassData.value != null ? false: true,
+  //   procced: (event) => {
+  //     deleteOptions.show = true
+  //   }
+  // }
 ]));
 
 const classForm = reactive({
