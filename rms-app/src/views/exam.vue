@@ -169,14 +169,19 @@ watchEffect(() => {
   examForm.description = selectedData.value?.description
   examForm.date = selectedData.value?.date
   examForm.max_score = selectedData.value?.max_score
-
-  if (examForm.classes != null) {
-    examForm.classes.forEach((element) => {
-      if (element.id == examForm.id) {
-        examForm.selectedClass = element
-      }
-    })
+  if(Array.isArray(examForm.classes)) {
+    let index = examForm.classes.findIndex(item => item.id == selectedData.value?.class_id)
+    examForm.selectedClass = examForm.classes[index]
   }
+
+  
+  // if (examForm.classes != null) {
+  //   examForm.classes.forEach((element) => {
+  //     if (element.id == examForm.id) {
+  //       examForm.selectedClass = element
+  //     }
+  //   })
+  // }
 })
 
 const toolbarActions = computed(() => [
