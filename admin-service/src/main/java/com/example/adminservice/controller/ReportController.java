@@ -3,6 +3,8 @@ package com.example.adminservice.controller;
 import java.awt.Color;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.util.List;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -35,7 +37,7 @@ public class ReportController {
     ExamService examService;
 
     @GetMapping(value = "/result")
-    public ResponseEntity<byte[]> result(@RequestParam int examId, @RequestParam int classId, @RequestParam String className) throws IOException {
+    public ResponseEntity<byte[]> result(@RequestParam int examId, @RequestParam int classId, @RequestParam String className) throws IOException, URISyntaxException {
         List<ResultEntity> resultData = service.getResult(examId, classId);
         ExamEntity examEntity = examService.examById(examId);
         // Create a new document
@@ -65,9 +67,10 @@ public class ReportController {
         int initY = pageHeight - 80;
 
         // PDImageXObject pdImage = PDImageXObject.createFromFile("admin-service/src/main/resources/assets/logo.jpg", document);
+        PDImageXObject pdImage = PDImageXObject.createFromFile(Paths.get(ClassLoader.getSystemResource("assets/logo.jpg").toURI()).toAbsolutePath().toString(), document);
         float scale = 0.15f;
 
-        // contentStream.drawImage(pdImage, initX, initY - 50, pdImage.getWidth() * scale, pdImage.getHeight() * scale);
+        contentStream.drawImage(pdImage, initX, initY - 50, pdImage.getWidth() * scale, pdImage.getHeight() * scale);
 
         setText(contentStream, "AUPP TECHNOLOGY CENTER", initX + 140, initY - 10, 20);
 
