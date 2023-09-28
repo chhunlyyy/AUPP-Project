@@ -64,13 +64,14 @@ const columns = [
 
 watchEffect(() => {
   studentList.value.forEach((item, index) => {
-    if(item.id == newData.value.id) {
+    if(item.id == newData.value?.id) {
       studentList.value[index] = newData.value
-    }    
+    }
   })
 
-  if(studentList.value.length > 0)
-    disable.value = studentList.value.filter(item => !item.score).length > 0
+  if(studentList.value.length > 0) {
+    disable.value = (studentList.value.filter(item => !item.score).length > 0) 
+  }
   else
     disable.value = true
 })
@@ -81,7 +82,7 @@ const toolbarActions = computed(() => ([
     style: "",
     icon: "pi pi-trash",
     severity: "primary",
-    disabled: disable.value,
+    disabled: disable.value || !(studentList.length == resultList.length),
     procced: (event) => {
       handleCreate()
     }
@@ -168,12 +169,13 @@ const handleCreate = () => {
 }
 
 const handleClear = () => {
-  filterForm.class = null;
-  filterForm.examination = null;
-  studentList.value = []
+  // filterForm.class = null;
+  // filterForm.examination = null;
+  studentList.value = []  
+  newData.value = null
   disable.value = true
-
   datatableRef.value.clearSelectedData()
+  handleApply()
 }
 
 const handleCellEdit = (event) => {
@@ -181,6 +183,10 @@ const handleCellEdit = (event) => {
 }
 
 const handleApply = async () => {
+
+  resultList.value = []
+  newData.value = null
+
   let filteredClass = classList.value.filter(item => item.id == filterForm.examination?.class_id);
   
   await axios.create({
