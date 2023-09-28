@@ -10,6 +10,7 @@ import Exam from '@/views/exam.vue';
 import Subject from '@/views/subject.vue';
 import ClassManagement from '@/views/class-management.vue';
 import Student from '@/views/student.vue';
+import Result from '@/views/result.vue';
 import Enrollment from '@/views/enrollment.vue';
 import { HomeIcon } from "@heroicons/vue/24/outline";
 
@@ -63,7 +64,7 @@ const router = createRouter({
           component: Student,
           meta: {
             requiresAuth: true,
-            roleId: [1],
+            roleId: [1,2],
             breadcrumb: {name: 'Student'}
           }
         },        
@@ -84,6 +85,15 @@ const router = createRouter({
           meta: {
             requiresAuth: true,
             breadcrumb: {name: 'Subject'}
+          }
+        },
+        {
+          path: 'results',
+          name: 'Result',
+          component: Result,
+          meta: {
+            requiresAuth: true,
+            breadcrumb: {name: 'Result'}
           }
         },
         {

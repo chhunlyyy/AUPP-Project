@@ -170,6 +170,7 @@ import {
   XMarkIcon,
   RectangleGroupIcon,
   PencilSquareIcon,
+  AcademicCapIcon,
 } from '@heroicons/vue/24/outline';
 
 import { ChevronRightIcon } from '@heroicons/vue/20/solid'
@@ -190,6 +191,7 @@ const navigation = computed(() => ([
     { name: 'Exam', href: '/exam', icon: PencilSquareIcon, roleId: [1, 2] },
     { name: 'Subjects', href: '/subjects', icon: BriefcaseIcon, roleId: [1] },
     { name: 'Student', href: '/students', icon: UsersIcon, roleId: [1] },
+    { name: 'Result', href: '/results', icon: AcademicCapIcon, roleId: [1,2] },
     {
       name: 'Class Management',
       href: '/class-management',

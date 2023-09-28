@@ -30,7 +30,7 @@ public class ResultServiceImpl implements ResultService {
         if (results.isEmpty()) {
             return ResponeHandler.generateResponse("No Result Found", HttpStatus.EXPECTATION_FAILED, null);
         } else {
-            return ResponeHandler.generateResponse("", HttpStatus.EXPECTATION_FAILED, results);
+            return ResponeHandler.generateResponse("", HttpStatus.OK, results);
         }
     }
 

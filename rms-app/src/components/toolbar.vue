@@ -14,7 +14,8 @@
         </div>
       </li>
     </ol>    
-    <div class="flex">
+    <div class="flex items-center gap-3">
+      <slot></slot>
       <Button v-for="(action, index) in actions" :disabled="action.disabled" :key="index" @click="action.procced($event)" :severity="action?.severity" :label="action.label" :icon="action.icon" :class="['mr-2 h-9 px-5', action.style]"></Button>      
     </div>
   </nav>
