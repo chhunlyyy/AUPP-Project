@@ -21,6 +21,7 @@ public class ResultServiceImpl implements ResultService {
 
     @Override
     public ResponseEntity<Object> addResult(List<ResultEntity> entites) {
+
         
         List<ResultEntity> finalResult = new ArrayList<>();
 
@@ -46,7 +47,13 @@ public class ResultServiceImpl implements ResultService {
             finalResult.set(finalResult.size(), resultEntity);
        }
         
-        resultRepo.saveAll(finalResult);
+
+        for (int i = 0; i < finalResult.size(); i++) {
+            try {
+                resultRepo.save(finalResult.get(i));
+            } catch (Exception e) { }
+        }
+
 
         return ResponeHandler.generateResponse("Add Student Result Successfully", HttpStatus.OK, null);
     }
