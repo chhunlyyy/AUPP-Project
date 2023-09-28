@@ -5,7 +5,7 @@
   <div class="p-3 mt-3 bg-gray-100 rounded flex gap-3 items-center">
       <Dropdown v-model="filterForm.class" :options="groupTeacher" optionGroupLabel="label" optionGroupChildren="items" placeholder="Choose class" optionLabel="name" class="mt-1 w-64 md:w-14rem"></Dropdown>
       <Dropdown v-model="filterForm.examination" :options="examOptions" :disabled="!filterForm.class" placeholder="Choose examinations" optionLabel="name" class="mt-1 w-64 md:w-14rem"></Dropdown>
-      <Button :disabled="!(filterForm.examination?.class_id == filterForm.class?.id)" style="height: 41px!important;margin-top: 2px!important;" @click="handleApply()" severity="primary" label="Apply" icon=""></Button>      
+      <Button :disabled="!((filterForm.examination?.class_id) && (filterForm.examination?.class_id == filterForm.class?.id))" style="height: 41px!important;margin-top: 2px!important;" @click="handleApply()" severity="primary" label="Apply" icon=""></Button>      
   </div>
   <div class="mt-3 flex flex-col lg:flex-row gap-3">
     <div class="flex-1">
@@ -71,6 +71,8 @@ watchEffect(() => {
 
   if(studentList.value.length > 0)
     disable.value = studentList.value.filter(item => !item.score).length > 0
+  else
+    disable.value = true
 })
 
 const toolbarActions = computed(() => ([
@@ -139,7 +141,7 @@ const handleCreate = () => {
     class_id: student.class_id,
     student_id: student.id,
     score: student.score,
-    exam_id: filterForm.value.examination.id,
+    exam_id: filterForm.examination?.id,
     status: 2
   }))
 
@@ -149,12 +151,7 @@ const handleCreate = () => {
       'Authorization': `Bearer ${token.value}`
     }
   })
-    .post("/teacher/result/add", [
-      {
-        user_id: enrollForm.student.id,
-        class_id: enrollForm.class.id
-      }
-    ])
+    .post("/teacher/result/add", form)
     .then(response => {
       if (response.data.status == 200) {
         toast.add({ severity: 'success', summary: 'Create successfully.', life: 3000 });
@@ -166,13 +163,15 @@ const handleCreate = () => {
       }
     })
     .catch((err) => {
-      toast.add({ severity: 'error', summary: 'Enrollment already exist.', life: 3000 });
+      toast.add({ severity: 'error', summary: 'All student already scored.', life: 3000 });
     })
 }
 
 const handleClear = () => {
   filterForm.class = null;
   filterForm.examination = null;
+  studentList.value = []
+  disable.value = true
 
   datatableRef.value.clearSelectedData()
 }
