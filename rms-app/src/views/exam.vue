@@ -21,16 +21,6 @@
           <InputText id="name" :value="examForm.name" v-model="examForm.name" class="w-full mt-1" />
         </div>
         <div class="mt-3">
-          <label for="name">Max Score</label>
-          <InputNumber
-            :value="examForm.max_score"
-            v-model="examForm.max_score"
-            inputId="minmax"
-            :min="0"
-            class="w-full mt-1"
-          />
-        </div>
-        <div class="mt-3">
           <label for="name">Exam Date</label>
           <br />
           <Calendar
@@ -98,7 +88,6 @@ const examForm = reactive({
   id: null,
   name: null,
   description: null,
-  max_score: null,
   date: null,
   classes: null,
   selectedClass: null
@@ -153,12 +142,7 @@ const columns = [
     header: 'Date',
     field: 'date',
     sortable: true
-  },
-  {
-    header: 'Max Score',
-    field: 'max_score',
-    sortable: true
-  },
+  }
   
 ]
 
@@ -168,7 +152,6 @@ watchEffect(() => {
   examForm.name = selectedData.value?.name
   examForm.description = selectedData.value?.description
   examForm.date = selectedData.value?.date
-  examForm.max_score = selectedData.value?.max_score
   if(Array.isArray(examForm.classes)) {
     let index = examForm.classes.findIndex(item => item.id == selectedData.value?.class_id)
     examForm.selectedClass = examForm.classes[index]
@@ -211,9 +194,7 @@ const handleUpdate = () => {
   if (
     examForm.selectedClass == null ||
     examForm.name == null ||
-    examForm.max_score == null ||
-    examForm.date == null ||
-    examForm.description == null
+    examForm.date == null
   ) {
     toast.add({
       severity: 'error',
@@ -233,7 +214,6 @@ const handleUpdate = () => {
         name: examForm.name,
         description: examForm.description,
         date: examForm.date,
-        max_score: examForm.max_score,
         class_id: examForm.selectedClass.id
       })
       .then((response) => {
@@ -250,9 +230,7 @@ const handleCreate = () => {
   if (
     examForm.selectedClass == null ||
     examForm.name == null ||
-    examForm.max_score == null ||
-    examForm.date == null ||
-    examForm.description == null
+    examForm.date == null
   ) {
     toast.add({
       severity: 'error',
@@ -272,7 +250,6 @@ const handleCreate = () => {
         name: examForm.name,
         description: examForm.description,
         date: examForm.date,
-        max_score: examForm.max_score,
         class_id: examForm.selectedClass.id
       })
       .then((response) => {

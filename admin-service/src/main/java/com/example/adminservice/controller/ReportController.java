@@ -64,11 +64,10 @@ public class ReportController {
         int initX = 50;
         int initY = pageHeight - 80;
 
-        PDImageXObject pdImage = PDImageXObject.createFromFile("admin-service/src/main/resources/assets/logo.jpg",
-                document);
+        // PDImageXObject pdImage = PDImageXObject.createFromFile("admin-service/src/main/resources/assets/logo.jpg", document);
         float scale = 0.15f;
 
-        contentStream.drawImage(pdImage, initX, initY - 50, pdImage.getWidth() * scale, pdImage.getHeight() * scale);
+        // contentStream.drawImage(pdImage, initX, initY - 50, pdImage.getWidth() * scale, pdImage.getHeight() * scale);
 
         setText(contentStream, "AUPP TECHNOLOGY CENTER", initX + 140, initY - 10, 20);
 

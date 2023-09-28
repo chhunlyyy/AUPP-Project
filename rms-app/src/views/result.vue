@@ -155,7 +155,7 @@ const handleCreate = () => {
     .post("/teacher/result/add", form)
     .then(response => {
       if (response.data.status == 200) {
-        toast.add({ severity: 'success', summary: 'Create successfully.', life: 3000 });
+        toast.add({ severity: 'success', summary: 'Insert new record successfully.', life: 3000 });
         fetchData();
         handleClear();
       }

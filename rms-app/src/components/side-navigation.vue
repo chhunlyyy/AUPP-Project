@@ -188,7 +188,7 @@ const currentUrl = computed(() => {
 const navigation = computed(() => ([
     { name: 'Dashboard', href: '/', icon: HomeIcon, roleId: [1,2] },
     { name: 'Lecturers', href: 'lecturers', icon: UsersIcon, roleId: [1] },
-    { name: 'Exam', href: '/exam', icon: PencilSquareIcon, roleId: [1, 2] },
+    { name: 'Exam', href: '/exam', icon: PencilSquareIcon, roleId: [1] },
     { name: 'Subjects', href: '/subjects', icon: BriefcaseIcon, roleId: [1] },
     { name: 'Student', href: '/students', icon: UsersIcon, roleId: [1] },
     { name: 'Result', href: '/results', icon: AcademicCapIcon, roleId: [1,2] },

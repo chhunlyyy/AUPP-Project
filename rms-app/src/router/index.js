@@ -54,7 +54,7 @@ const router = createRouter({
           component: Exam,
           meta: {
             requiresAuth: true,
-            roleId: [1, 2],
+            roleId: [1],
             breadcrumb: {name: 'Exam'}
           }
         },     
