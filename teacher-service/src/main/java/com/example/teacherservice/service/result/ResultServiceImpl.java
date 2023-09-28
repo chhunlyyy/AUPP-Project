@@ -1,5 +1,7 @@
 package com.example.teacherservice.service.result;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,32 @@ public class ResultServiceImpl implements ResultService {
 
     @Override
     public ResponseEntity<Object> addResult(List<ResultEntity> entites) {
-        resultRepo.saveAll(entites);
+        
+        List<ResultEntity> finalResult = new ArrayList<>();
+
+       for(ResultEntity resultEntity : entites){
+        int score = resultEntity.getScore();
+        String grade = "";
+            if (score >= 90) {
+                grade = "A";
+            } else if (score >= 80) {
+                grade = "B";
+            } else if (score >= 70) {
+                grade = "C";
+            } else if (score >= 60) {
+                grade = "D";
+            } else if (score >= 50) {
+                grade = "E";
+            } else {
+                grade = "F";
+            }
+
+            resultEntity.setGrade(grade);
+
+            finalResult.set(finalResult.size(), resultEntity);
+       }
+        
+        resultRepo.saveAll(finalResult);
 
         return ResponeHandler.generateResponse("Add Student Result Successfully", HttpStatus.OK, null);
     }
